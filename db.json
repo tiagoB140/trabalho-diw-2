@@ -23,6 +23,14 @@
       "senha": "1234",
       "admin": false,
       "id": "xLRsY_aX9Zc"
+    },
+    {
+      "nome": "isabela",
+      "email": "tiagobelico@gmail.com",
+      "login": "isabela",
+      "senha": "1234",
+      "admin": false,
+      "id": "q2Vz3CNbMj0"
     }
   ],
   "itens": [],

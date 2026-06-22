@@ -43,10 +43,6 @@
           <a class="nav-link" href="#treinos">Planos</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="dashboard.html">Dashboard</a>
-        </li>
-
       </ul>
 
     </div>
@@ -99,12 +95,23 @@
 
 </section>
 
-<!-- TREINOS -->
+<!-- CARDS -->
 <section id="treinos" class="container mt-5">
 
   <h2>Planos de Treino</h2>
 
   <div class="row mt-4" id="cards-container"></div>
+
+</section>
+
+<!-- ETAPA 3 - VISUALIZAÇÃO AVANÇADA -->
+<section class="container mt-5">
+
+  <h2>📊 Visualização Avançada</h2>
+
+  <p>Gráfico de calorias dos treinos cadastrados no sistema.</p>
+
+  <canvas id="graficoCalorias"></canvas>
 
 </section>
 
@@ -132,13 +139,14 @@
 <!-- SCRIPTS -->
 <script src="app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+
+// MENU DINÂMICO (CORRIGIDO COM ADMIN)
 function atualizarMenu() {
   const user = JSON.parse(sessionStorage.getItem("usuario"));
   const menu = document.getElementById("menu");
-
-  if (!menu) return;
 
   let html = `
     <li class="nav-item">
@@ -150,10 +158,22 @@ function atualizarMenu() {
     </li>
   `;
 
+  // 🔥 BOTÃO CRUD SÓ PARA ADMIN
+  if (user && user.admin === true) {
+    html += `
+      <li class="nav-item">
+        <a class="btn btn-warning btn-sm ms-2" href="crud.html">
+          Cadastro de Itens
+        </a>
+      </li>
+    `;
+  }
+
+  // LOGIN / LOGOUT
   if (!user) {
     html += `
       <li class="nav-item">
-        <a class="btn btn-outline-light btn-sm ms-3" href="login.html">
+        <a class="btn btn-outline-light btn-sm ms-2" href="login.html">
           Login
         </a>
       </li>
@@ -183,6 +203,38 @@ function logout() {
 }
 
 atualizarMenu();
+
+
+// GRÁFICO (ETAPA 3)
+async function carregarGrafico() {
+  try {
+    const res = await fetch("http://localhost:3000/planos");
+    const planos = await res.json();
+
+    const labels = planos.map(p => p.nome);
+    const dados = planos.map(p => parseInt(p.calorias));
+
+    const ctx = document.getElementById("graficoCalorias");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "Calorias gastas",
+          data: dados,
+          backgroundColor: "#dc3545"
+        }]
+      }
+    });
+
+  } catch (error) {
+    console.error("Erro ao carregar gráfico:", error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", carregarGrafico);
+
 </script>
 
 </body>
