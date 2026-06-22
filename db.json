@@ -34,7 +34,14 @@
       "senha": "1234",
       "admin": false,
       "id": "q2Vz3CNbMj0",
-      "favoritos": []
+      "favoritos": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        1
+      ]
     }
   ],
   "itens": [],
