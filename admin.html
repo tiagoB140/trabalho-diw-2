@@ -1,0 +1,30 @@
+<h2>CRUD Admin</h2>
+
+<input id="titulo" placeholder="Título">
+<input id="descricao" placeholder="Descrição">
+<input id="imagem" placeholder="Imagem URL">
+
+<button onclick="adicionarItem()">Adicionar</button>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Título</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody id="tabela"></tbody>
+</table>
+
+<script src="auth.js"></script>
+<script src="admin.js"></script>
+
+<script>
+if (!isAdmin()) {
+  alert("Acesso negado");
+  window.location.href = "index.html";
+}
+
+listarItens();
+</script>

@@ -1,0 +1,30 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "login": "admin",
+      "senha": "123",
+      "nome": "Administrador",
+      "email": "admin@abc.com",
+      "admin": true
+    },
+    {
+      "nome": "TIAGO BELICO DE OLIVEIRA E SILVA",
+      "email": "tiagobelico@gmail.com",
+      "login": "tiagobelico@gmail.com",
+      "senha": "Tiago1406",
+      "admin": false,
+      "id": "w9D8ylzBqX0"
+    },
+    {
+      "nome": "Tiago",
+      "email": "tiagobelico@gmail.com",
+      "login": "tiago2",
+      "senha": "1234",
+      "admin": false,
+      "id": "xLRsY_aX9Zc"
+    }
+  ],
+  "itens": [],
+  "$schema": "./node_modules/json-server/schema.json"
+}

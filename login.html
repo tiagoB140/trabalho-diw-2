@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAVBAR IGUAL AO SEU SITE -->
+<nav class="navbar navbar-dark bg-dark px-3">
+  <a class="navbar-brand" href="index.html">Meu Site</a>
+
+  <div>
+    <a href="index.html" class="btn btn-outline-light btn-sm">Home</a>
+  </div>
+</nav>
+
+<!-- CONTEÚDO LOGIN -->
+<div class="container mt-5">
+
+  <div class="row justify-content-center">
+
+    <div class="col-md-5">
+
+      <div class="card shadow p-4">
+
+        <h3 class="text-center mb-4">Login</h3>
+
+        <input id="login" class="form-control mb-3" placeholder="Usuário">
+
+        <input id="senha" type="password" class="form-control mb-3" placeholder="Senha">
+
+        <button class="btn btn-primary w-100" onclick="fazerLogin()">
+          Entrar
+        </button>
+
+        <p class="text-center mt-3">
+  Não tem conta?
+  <a href="cadastro.html">Cadastrar</a>
+</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script src="auth.js"></script>
+
+<script>
+function fazerLogin() {
+  loginUsuario(
+    document.getElementById("login").value,
+    document.getElementById("senha").value
+  );
+}
+</script>
+
+</body>
+</html>
