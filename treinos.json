@@ -1,0 +1,26 @@
+[
+  {
+    "nome": "Treino A",
+    "exercicios": 10
+  },
+  {
+    "nome": "Treino B",
+    "exercicios": 8
+  },
+  {
+    "nome": "Treino C",
+    "exercicios": 6
+  },
+  {
+    "nome": "Treino D",
+    "exercicios": 4
+  },
+  {
+    "nome": "Treino E",
+    "exercicios": 8
+  },
+  {
+    "nome": "Treino F",
+    "exercicios": 3
+  }
+]

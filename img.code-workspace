@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "img",
+			"path": "../trabalho-pr-tico-semana-14-tiagoB140/trabalho, diw/img"
+		},
+		{
+			"name": "semana-14-atividade-diw-tiago",
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "semana-14-atividade-diw-tiago"
+	}
+}

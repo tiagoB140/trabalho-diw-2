@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Academia</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f4f4;
+        }
+
+        header{
+            background:#222;
+            color:white;
+            padding:20px;
+            text-align:center;
+        }
+
+        nav{
+            background:#333;
+            padding:15px;
+            text-align:center;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            margin:0 15px;
+            font-weight:bold;
+        }
+
+        nav a:hover{
+            color:#ffc107;
+        }
+
+        .container{
+            max-width:1100px;
+            margin:30px auto;
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:20px;
+        }
+
+        .info{
+            display:flex;
+            justify-content:space-around;
+            flex-wrap:wrap;
+            margin-bottom:30px;
+        }
+
+        .card{
+            background:#f8f8f8;
+            padding:20px;
+            border-radius:10px;
+            width:250px;
+            text-align:center;
+            margin:10px;
+        }
+
+        .card h3{
+            margin-bottom:10px;
+        }
+
+        footer{
+            background:#222;
+            color:white;
+            text-align:center;
+            padding:20px;
+            margin-top:30px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>Academia Fitness</h1>
+</header>
+
+<nav>
+    <a href="index.html">Início</a>
+    <a href="dashboard.html">Dashboard</a>
+</nav>
+
+<div class="container">
+
+    <h2>Estatísticas dos Treinos</h2>
+
+    <div class="info">
+
+        <div class="card">
+            <h3>Total de Treinos</h3>
+            <p id="totalTreinos">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Exercícios</h3>
+            <p id="totalExercicios">0</p>
+        </div>
+
+    </div>
+
+    <canvas id="graficoTreinos"></canvas>
+
+</div>
+
+<footer>
+    Desenvolvido por Tiago
+</footer>
+
+<script>
+
+fetch("treinos.json")
+    .then(response => response.json())
+    .then(dados => {
+
+        const nomes = dados.map(item => item.nome);
+        const exercicios = dados.map(item => item.exercicios);
+
+        document.getElementById("totalTreinos").innerText =
+            dados.length;
+
+        const soma = exercicios.reduce(
+            (total, valor) => total + valor,
+            0
+        );
+
+        document.getElementById("totalExercicios").innerText =
+            soma;
+
+        new Chart(
+            document.getElementById("graficoTreinos"),
+            {
+                type: "bar",
+
+                data: {
+                    labels: nomes,
+
+                    datasets: [{
+                        label: "Quantidade de Exercícios",
+                        data: exercicios
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            }
+        );
+
+    });
+
+</script>
+
+</body>
+</html>
