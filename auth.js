@@ -1,6 +1,6 @@
 const API = "http://localhost:3000";
 
-// LOGIN
+// ===================== LOGIN =====================
 async function loginUsuario(login, senha) {
   const res = await fetch(`${API}/usuarios`);
   const usuarios = await res.json();
@@ -14,23 +14,61 @@ async function loginUsuario(login, senha) {
     return;
   }
 
+  // 🔥 garante campo favoritos sempre existir
+  if (!user.favoritos) {
+    user.favoritos = [];
+  }
+
   sessionStorage.setItem("usuario", JSON.stringify(user));
   window.location.href = "index.html";
 }
 
-// PEGAR USUÁRIO LOGADO
+// ===================== USUÁRIO LOGADO =====================
 function getUsuarioLogado() {
   return JSON.parse(sessionStorage.getItem("usuario"));
 }
 
-// LOGOUT
+// ===================== LOGOUT =====================
 function logout() {
   sessionStorage.removeItem("usuario");
   window.location.href = "index.html";
 }
 
-// VERIFICAR SE É ADMIN
+// ===================== ADMIN =====================
 function isAdmin() {
   const user = getUsuarioLogado();
   return user && user.admin === true;
+}
+
+// ===================== FAVORITOS (NOVO) =====================
+
+// adicionar ou remover favorito
+async function toggleFavorito(idItem) {
+
+  let user = getUsuarioLogado();
+
+  if (!user) {
+    alert("Faça login primeiro");
+    return;
+  }
+
+  if (!user.favoritos) {
+    user.favoritos = [];
+  }
+
+  if (user.favoritos.includes(idItem)) {
+    user.favoritos = user.favoritos.filter(id => id !== idItem);
+  } else {
+    user.favoritos.push(idItem);
+  }
+
+  // atualizar no JSONServer
+  await fetch(`${API}/usuarios/${user.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user)
+  });
+
+  // atualizar sessão
+  sessionStorage.setItem("usuario", JSON.stringify(user));
 }
